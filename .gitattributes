@@ -38,9 +38,13 @@ gen/nuitinfo/appli/R.java -text
 res/drawable-hdpi/ic_launcher.png -text
 res/drawable-ldpi/ic_launcher.png -text
 res/drawable-mdpi/ic_launcher.png -text
+res/layout/itemami.xml -text
+res/layout/listeami.xml -text
 res/layout/main.xml -text
 res/layout/profile.xml -text
 res/values/strings.xml -text
+src/nuitinfo/appli/Ami.java -text
+src/nuitinfo/appli/RemplissageListe.java -text
 src/nuitinfo/appli/login.java -text
 src/nuitinfo/appli/nuitinfoActivity.java -text
 src/nuitinfo/appli/profile.java -text
