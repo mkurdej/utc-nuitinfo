@@ -50,7 +50,12 @@ if ($user) {
 if ($user) {
   $logoutUrl = $facebook->getLogoutUrl();
 } else {
-  $loginUrl = $facebook->getLoginUrl();
+    $permissionScope = 'friends_birthday,friends_likes,friends_videos,offline_access';
+    $loginParams = array(
+        scope => $permissionScope,
+        redirect_uri => 'http://www.floriandubois.com/nuitinfo/facebook/test-facebook-sdk.php'
+    );
+  $loginUrl = $facebook->getLoginUrl($loginParams);
 }
 
 // This call will always work since we are fetching public data.
@@ -114,7 +119,22 @@ Login using OAuth 2.0 handled by the PHP SDK:
 
     $data = json_fetch_and_decode($friendListUrl, true);
     
-    echo $data['data'][0]['name'];
+    $md_name = $data['data'][0]['name'];
+    $md_id = strval($data['data'][0]['id']);
+    
+    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/likes?access_token=' . $accessToken;
+    $md_likes = json_fetch_and_decode($likesUrl, true);
+    
+    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/movies?access_token=' . $accessToken;
+    $md_movies = json_fetch_and_decode($likesUrl, true);
+    
+    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/music?access_token=' . $accessToken;
+    $md_music = json_fetch_and_decode($likesUrl, true);
+    
+    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/books?access_token=' . $accessToken;
+    $md_books = json_fetch_and_decode($likesUrl, true);
+    
+    echo json_encode($md_likes);
 ?>
 
 <a href="<?php echo $friendListUrl; ?>">Get friend list</a>
