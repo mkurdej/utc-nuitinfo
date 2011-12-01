@@ -17,8 +17,11 @@
 
 require 'facebook-php-sdk/src/facebook.php';
 
+require 'util.php';
+
 // Create our Application instance (replace this with your appId and secret).
 // UTC-NuitInfo11
+// https://developers.facebook.com/apps/274832242563339/
 $facebook = new Facebook(array(
   'appId' => '274832242563339',
   'secret' => '4946a0747eb4c8b07340c856bd6a741a',
@@ -109,9 +112,7 @@ Login using OAuth 2.0 handled by the PHP SDK:
     // http://developers.facebook.com/docs/reference/api/
     $friendListUrl = 'https://graph.facebook.com/me/friends?access_token=' . $accessToken;
 
-    $friendList = @file_get_contents($friendListUrl);
-    
-    $data = json_decode($friendList, true);
+    $data = json_fetch_and_decode($friendListUrl, true);
     
     echo $data['data'][0]['name'];
 ?>
