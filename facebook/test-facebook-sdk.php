@@ -24,7 +24,7 @@ $facebook = new Facebook(array(
   'secret' => '4946a0747eb4c8b07340c856bd6a741a',
 ));
 
-// Get User ID
+// Get User ID or 0 if not connected
 $user = $facebook->getUser();
 
 // We may or may not have this data based on whether the user is logged in.
@@ -99,6 +99,26 @@ Login using OAuth 2.0 handled by the PHP SDK:
 <h3>Public profile of Naitik</h3>
 <img src="https://graph.facebook.com/naitik/picture">
 <?php echo $naitik['name']; ?>
+
+<br/>
+
+<?php
+    // Get the current access token
+    $accessToken = $facebook->getAccessToken();
+    // Get friends list URL
+    // http://developers.facebook.com/docs/reference/api/
+    $friendListUrl = 'https://graph.facebook.com/me/friends?access_token=' . $accessToken;
+
+    $friendList = @file_get_contents($friendListUrl);
+    
+    $data = json_decode($friendList, true);
+    
+    echo $data['data'][0]['name'];
+?>
+
+<a href="<?php echo $friendListUrl; ?>">Get friend list</a>
+    
+<br/>
+
 </body>
 </html>
-
