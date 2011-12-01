@@ -20,6 +20,16 @@ bin/res/drawable-hdpi/ic_launcher.png -text
 bin/res/drawable-ldpi/ic_launcher.png -text
 bin/res/drawable-mdpi/ic_launcher.png -text
 bin/resources.ap_ -text
+facebook/facebook-php-sdk/changelog.md -text
+facebook/facebook-php-sdk/examples/example.php -text
+facebook/facebook-php-sdk/examples/with_js_sdk.php -text
+facebook/facebook-php-sdk/readme.md -text
+facebook/facebook-php-sdk/src/base_facebook.php -text
+facebook/facebook-php-sdk/src/facebook.php -text
+facebook/facebook-php-sdk/src/fb_ca_chain_bundle.crt -text
+facebook/facebook-php-sdk/tests/bootstrap.php -text
+facebook/facebook-php-sdk/tests/tests.php -text
+facebook/test-facebook-sdk.php -text
 gen/nuitinfo/appli/R.java -text
 /info.txt -text
 /proguard.cfg -text
