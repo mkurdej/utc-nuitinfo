@@ -3,5 +3,6 @@
 
     <string name="hello">Bienvenue sur l\'appli NuitInfo!</string>
     <string name="app_name">nuitinfo2011</string>
+    <string name="MaListeAmi">Liste Ami</string>
 
 </resources>

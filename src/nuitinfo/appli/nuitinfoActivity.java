@@ -3,6 +3,7 @@ package nuitinfo.appli;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class nuitinfoActivity extends Activity
@@ -16,6 +17,7 @@ public class nuitinfoActivity extends Activity
 		setContentView(R.layout.profile);
 		Intent i = new Intent(nuitinfoActivity.this, login.class);
 		startActivityForResult(i, RESULT_Main);
+		Log.v("nujitinfoActivity", "create what the fuck !!!!");
 		 
         tv = new TextView(this);
         setContentView(tv);

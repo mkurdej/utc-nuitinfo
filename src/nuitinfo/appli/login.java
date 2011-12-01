@@ -66,7 +66,9 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 		button.setOnClickListener(this);
 		
 		button = (Button) findViewById(R.id.cancelbutton);
+		Button btnAmis = (Button) findViewById(R.id.btnAmis);
 		button.setOnClickListener(this);
+		btnAmis.setOnClickListener(this);
     }
 	
     public boolean onTouch(View v, MotionEvent event) {
@@ -103,6 +105,11 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
             		/* agir pour bouton 2 */
             		quit(false, null);
             	break;
+            case R.id.btnAmis :
+            {
+            	goListFriends(v);
+            	break;
+            }
     			
     	/* etc. */
         }
@@ -290,5 +297,12 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void goListFriends(View v)
+	{
+		//setContentView(R.layout.listeami);
+		Intent i = new Intent(v.getContext(), RemplissageListe.class);
+		startActivityForResult(i, 0);
 	}
 }
