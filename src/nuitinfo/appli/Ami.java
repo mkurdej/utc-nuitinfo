@@ -59,6 +59,7 @@ public class Ami
 	public HashMap<String, String> getHashMap()
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", String.valueOf(id));
 		map.put("nomPrenom", prenom + " " + nom);
 		map.put("description", "Tableur");
 		map.put("img", String.valueOf(R.drawable.fleur));
