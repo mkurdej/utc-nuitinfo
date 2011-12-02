@@ -11,17 +11,17 @@
         android:label="@string/app_name" >
         <activity
             android:label="@string/app_name"
-            android:name="nuitinfo.appli.nuitinfoActivity" >
+            android:name=".MainActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="nuitinfo.appli.profile"></activity>
-        <activity android:name="nuitinfo.appli.login"></activity>
-        <activity android:name="nuitinfo.appli.RemplissageListe"></activity>
-        <activity android:name="nuitinfo.appli.ChoixType"></activity>
-        <activity android:name="nuitinfo.appli.ListeCadeau"></activity>
+        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ContactListActivity"></activity>
+        <activity android:name=".CategoryChoiceActivity"></activity>
+        <activity android:name=".GiftListActivity"></activity>
     </application>
 	<uses-permission android:name="android.permission.INTERNET">
 	</uses-permission> 
