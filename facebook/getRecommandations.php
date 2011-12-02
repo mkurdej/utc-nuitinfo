@@ -46,7 +46,7 @@ $access_token = $_GET["access_token"];
 // temporary only
 $user_id = 1526860101;
 $access_token = 'AAAD59V4w2QsBAHvZAVa4kL55dfAOIEEsdqyAQWn1FZART28hhRKcKZCom8EQXTWmBtq4614bpFuSxyUyhUmUIGiLLKSGOUZD';
-$friend_id = 29709340;
+//$friend_id = 29709340;
 
 // Create our Application instance
 $facebook = new Facebook(array(

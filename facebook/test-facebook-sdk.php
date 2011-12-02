@@ -36,13 +36,13 @@ $user = $facebook->getUser();
 // token is invalid if the user logged out of Facebook.
 
 if ($user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user = null;
-  }
+    try {
+        // Proceed knowing you have a logged in user who's authenticated.
+        $user_profile = $facebook->api('/me');
+    } catch (FacebookApiException $e) {
+        error_log($e);
+        $user = null;
+    }
 }
 
 // Login or logout url will be needed depending on current user state.
