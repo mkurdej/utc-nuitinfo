@@ -2,8 +2,8 @@
 
 // required parameters: 
 //  user_id=...
-//  friend_id=...
 //  access_token=...
+//  friend_id=...
 
 require 'facebook-php-sdk/src/facebook.php';
 require 'util.php';
@@ -43,16 +43,15 @@ $user_id = $_GET["user_id"];
 $friend_id = $_GET["friend_id"];
 $access_token = $_GET["access_token"];
 
-$user_id=1526860101;
-$friend_id=29709340;
-$access_token=AAAD59V4w2QsBAHvZAVa4kL55dfAOIEEsdqyAQWn1FZART28hhRKcKZCom8EQXTWmBtq4614bpFuSxyUyhUmUIGiLLKSGOUZD;
+// temporary only
+$user_id = 1526860101;
+$access_token = 'AAAD59V4w2QsBAHvZAVa4kL55dfAOIEEsdqyAQWn1FZART28hhRKcKZCom8EQXTWmBtq4614bpFuSxyUyhUmUIGiLLKSGOUZD';
+$friend_id = 29709340;
 
-// Create our Application instance (replace this with your appId and secret).
-// UTC-NuitInfo11
-// https://developers.facebook.com/apps/274832242563339/
+// Create our Application instance
 $facebook = new Facebook(array(
-  'appId' => '274832242563339',
-  'secret' => '4946a0747eb4c8b07340c856bd6a741a',
+    'appId' => '274832242563339',
+    'secret' => '4946a0747eb4c8b07340c856bd6a741a',
 ));
 
 if ($user_id) {
@@ -64,10 +63,9 @@ if ($user_id) {
         $friendData[$reqName] = $friendData[$reqName]['data'];
     }
     $recommandations = getGiftRecommandations($friendData);
-    print_r(json_encode($recommandations));
-    //exit();
+    echo json_encode($recommandations);
 } else {
     $error = array('error' => 'User not connected');
-    print_r(json_encode($error));
+    echo json_encode($error);
     exit(-1);
 }
