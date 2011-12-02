@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 /**
- * Pour être plus précis, c'est le remplissage de la liste d'ami.
+ * Pour ï¿½tre plus prï¿½cis, c'est le remplissage de la liste d'ami.
  * @author M4veR1K & Lowery
  *
  */
@@ -37,6 +37,8 @@ public class RemplissageListe extends Activity implements Runnable
 	private ListView maListViewPerso;
 	private ProgressDialog progressDialog;
 	private ArrayList<HashMap<String, String>> listItem;
+	private int user_id;
+	private String access_token;
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg)
 		{
@@ -78,6 +80,10 @@ public class RemplissageListe extends Activity implements Runnable
 		progressDialog.setMessage("Please wait...");
 		progressDialog.setIndeterminate(true);
 		progressDialog.setCancelable(false);
+		
+		Intent i = getIntent();
+		user_id = i.getIntExtra("id", 0);
+		access_token = i.getStringExtra("access");
 
 		// Rï¿½cupï¿½ration de la listview crï¿½ï¿½e dans le fichier main.xml
 		maListViewPerso = (ListView) findViewById(R.id.listviewperso);
@@ -106,12 +112,12 @@ public class RemplissageListe extends Activity implements Runnable
 
 		try
 		{
-			// On établit un lien avec le script PHP
+			// On ï¿½tablit un lien avec le script PHP
 			URI uri = URIUtils.createURI("http", "www.floriandubois.com", -1, "nuitinfo/facebook/getFriendList.php", "user_id=" + userid + "&access_token=" + access_token, null);
 			HttpGet get = new HttpGet(uri);
 			get.setHeader("Content-Type", "application/x-www-form-urlencoded");
 			// par le script PHP en get
-			// On récupère le résultat du script
+			// On rï¿½cupï¿½re le rï¿½sultat du script
 			response = client.execute(get);
 			entity = response.getEntity();
 			InputStream is = entity.getContent();
@@ -143,7 +149,7 @@ public class RemplissageListe extends Activity implements Runnable
 
 	public void run()
 	{
-		listItem = getListAmis(2, "");
+		listItem = getListAmis(user_id, access_token);
 		handler.sendEmptyMessage(0);
 	}
 	
