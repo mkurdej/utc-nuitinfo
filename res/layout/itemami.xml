@@ -25,7 +25,7 @@
 	    <TextView android:id="@+id/nomPrenom"
 	         android:layout_width="fill_parent"
 	         android:layout_height="fill_parent"
-	         android:textSize="16px"
+	         android:textSize="20px"
 	         android:textStyle="bold"
 	         />
  

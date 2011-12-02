@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,14 +14,12 @@ import android.widget.SimpleAdapter;
 
 public class RemplissageListe extends Activity
 {
-
 	private ListView maListViewPerso;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-			System.out.println("TEST");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listeami);
 
@@ -39,8 +37,7 @@ public class RemplissageListe extends Activity
 			listItem.add(ami.getHashMap());
 		}
 
-		// Création d'un SimpleAdapter qui se chargera de mettre les items présents dans notre list (listItem) dans la
-		// vue affichageitem
+		// Création d'un SimpleAdapter qui se chargera de mettre les items présents dans notre list (listItem) dans la vue affichageitem
 		SimpleAdapter mSchedule = new SimpleAdapter(this.getBaseContext(), listItem, R.layout.itemami,
 				new String[] { "img", "nomPrenom", "description" }, new int[] { R.id.img, R.id.nomPrenom, R.id.description });
 
@@ -55,16 +52,9 @@ public class RemplissageListe extends Activity
 			{
 				// on récupère la HashMap contenant les infos de notre item (titre, description, img)
 				HashMap<String, String> map = (HashMap<String, String>) maListViewPerso.getItemAtPosition(position);
-				// on créé une boite de dialogue
-				AlertDialog.Builder adb = new AlertDialog.Builder(RemplissageListe.this);
-				// on attribue un titre à notre boite de dialogue
-				adb.setTitle("Sélection Item");
-				// on insère un message à notre boite de dialogue, et ici on affiche le titre de l'item cliqué
-				adb.setMessage("Votre choix : " + map.get("titre"));
-				// on indique que l'on veut le bouton ok à notre boite de dialogue
-				adb.setPositiveButton("Ok", null);
-				// on affiche la boite de dialogue
-				adb.show();
+				Intent i = new Intent(v.getContext(), ChoixType.class);
+				i.putExtra("idAmi", map.get("id"));
+				startActivityForResult(i, 0);
 			}
 		});
 	}

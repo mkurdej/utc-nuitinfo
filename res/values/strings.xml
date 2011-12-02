@@ -4,5 +4,8 @@
     <string name="hello">Bienvenue sur l\'appli NuitInfo!</string>
     <string name="app_name">nuitinfo2011</string>
     <string name="MaListeAmi">Liste Ami</string>
+    <string name="btnMovie">Films</string>
+    <string name="btnMusic">Musiques</string>
+    <string name="btnBook">Livres</string>
 
 </resources>

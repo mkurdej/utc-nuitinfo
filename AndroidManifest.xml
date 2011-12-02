@@ -20,6 +20,8 @@
         <activity android:name="nuitinfo.appli.profile"></activity>
         <activity android:name="nuitinfo.appli.login"></activity>
         <activity android:name="nuitinfo.appli.RemplissageListe"></activity>
+        <activity android:name="nuitinfo.appli.ChoixType"></activity>
+        <activity android:name="nuitinfo.appli.ListeCadeau"></activity>
     </application>
 	<uses-permission android:name="android.permission.INTERNET">
 	</uses-permission> 

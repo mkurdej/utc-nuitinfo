@@ -301,7 +301,6 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 	
 	public void goListFriends(View v)
 	{
-		//setContentView(R.layout.listeami);
 		Intent i = new Intent(v.getContext(), RemplissageListe.class);
 		startActivityForResult(i, 0);
 	}
