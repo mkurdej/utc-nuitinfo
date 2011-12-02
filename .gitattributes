@@ -1,6 +1,7 @@
 * text=auto !eol
 /.classpath -text
 /.project -text
+.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 /AndroidManifest.xml -text
 bin/classes.dex -text
 bin/classes/nuitinfo/appli/R$attr.class -text
@@ -15,6 +16,7 @@ bin/classes/nuitinfo/appli/login.class -text
 bin/classes/nuitinfo/appli/nuitinfoActivity.class -text
 bin/classes/nuitinfo/appli/profile$1.class -text
 bin/classes/nuitinfo/appli/profile.class -text
+bin/home.xml -text
 bin/nuitinfo2011.apk -text
 bin/res/drawable-hdpi/ic_launcher.png -text
 bin/res/drawable-ldpi/ic_launcher.png -text
@@ -40,7 +42,6 @@ final/login.java -text
 final/main.xml -text
 final/nuitinfo2011Activity.java -text
 final/profile.java -text
-final/profile.xml -text
 final/strings.xml -text
 gen/nuitinfo/appli/R.java -text
 /info.txt -text

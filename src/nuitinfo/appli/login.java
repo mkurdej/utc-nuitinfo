@@ -2,6 +2,8 @@ package nuitinfo.appli;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -18,11 +20,15 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -42,11 +48,13 @@ import android.widget.EditText;
 
 public class login extends Activity implements View.OnTouchListener, View.OnClickListener
 {
-	public static final String strURL = "http://www.floriandubois.com/nuitinfo/android/login.php";
+	
 	public static final int RESULT_Main = 1;
 	public ProgressDialog progressDialog;
 	private EditText UserEditText;
 	private EditText PassEditText;
+	private int user_id;
+	private String access_token;
 	
     public void onCreate(Bundle savedInstanceState)
     {
@@ -58,7 +66,7 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 		progressDialog.setMessage("Please wait...");
 		progressDialog.setIndeterminate(true);
 		progressDialog.setCancelable(false);
-		// Récupération des éléments de la vue définis dans le xml
+		// Rï¿½cupï¿½ration des ï¿½lï¿½ments de la vue dï¿½finis dans le xml
 		UserEditText = (EditText) findViewById(R.id.username);
 		PassEditText = (EditText) findViewById(R.id.password);
 		
@@ -92,8 +100,14 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
     					String user = UserEditText.getText().toString();
     					String pass = PassEditText.getText().toString();
     					// On appelle la fonction doLogin qui va communiquer avec le PHP
-    					doLogin(user, pass);
-    					//createDialog("Error2", "Please enter Username and Password");
+    					try {
+							doLogin(user, pass);
+						} catch (URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+    	            	goListFriends(v);
+    			    	//createDialog("Error2", "Please enter Username and Password");
     					//Intent myIntent = new Intent(v.getContext(), profile.class);
     	                //startActivityForResult(myIntent, 0);
     				}
@@ -117,7 +131,7 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
     
     public void createDialog(String title, String text)
 	{
-		// Création d'une popup affichant un message
+		// Crï¿½ation d'une popup affichant un message
 		AlertDialog ad = new AlertDialog.Builder(this)
 				.setPositiveButton("Ok", null).setTitle(title).setMessage(text)
 				.create();
@@ -127,153 +141,53 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
     
     public void quit(boolean success, Intent i)
 	{
-		// On envoie un résultat qui va permettre de quitter l'appli
+		// On envoie un rï¿½sultat qui va permettre de quitter l'appli
 		setResult((success) ? Activity.RESULT_OK : Activity.RESULT_CANCELED, i);
 		finish();
 	}
     
-    public void doLogin(final String login, final String pass)
+    public void doLogin(final String login, final String pass) throws URISyntaxException
     {
 		final String pw = md5(pass);
-		// Création d'un thread
-		Thread t = new Thread()
-		{
+		
+		URI uri = URIUtils.createURI("http", "www.floriandubois.com", -1, "nuitinfo/facebook/connexion.php", "login=" + login, null);
+		HttpGet get = new HttpGet(uri);
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpConnectionParams.setConnectionTimeout(client.getParams(), 15000);
 
-			public void run()
-			{
+		HttpResponse response;
+		HttpEntity entity;
 
-				Looper.prepare();
-				// On se connecte au serveur afin de communiquer avec le PHP
-				DefaultHttpClient client = new DefaultHttpClient();
-				HttpConnectionParams.setConnectionTimeout(client.getParams(), 15000);
-
-				HttpResponse response;
-				HttpEntity entity;
-
-				try
-				{
-					// On établit un lien avec le script PHP
-					HttpPost post = new HttpPost(strURL);
-					List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-					nvps.add(new BasicNameValuePair("username", login));
-					nvps.add(new BasicNameValuePair("password", pw));
-					post.setHeader("Content-Type", "application/x-www-form-urlencoded");
-					// On passe les paramètres login et password qui vont être récupérés
-					// par le script PHP en post
-					post.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-					// On récupère le résultat du script
-					response = client.execute(post);
-					entity = response.getEntity();
-					InputStream is = entity.getContent();
-					// On appelle une fonction définie plus bas pour traduire la réponse
-					read(is);
-					is.close();
-					if (entity != null) entity.consumeContent();
-				}
-				catch (Exception e)
-				{
-					progressDialog.dismiss();
-					//createDialog("Error", "Couldn't establish a connection");
-				}
-				Looper.loop();
-			}
-		};
-		t.start();
-    }
-	
-    private void read(InputStream in)
-	{
-		// On traduit le résultat d'un flux
-		SAXParserFactory spf = SAXParserFactory.newInstance();
-		SAXParser sp;
 		try
 		{
-			sp = spf.newSAXParser();
-			XMLReader xr = sp.getXMLReader();
-			// Cette classe est définie plus bas
-			LoginContentHandler uch = new LoginContentHandler();
-			xr.setContentHandler(uch);
-			xr.parse(new InputSource(in));
+			get.setHeader("Content-Type", "application/x-www-form-urlencoded");
+			// On passe les paramï¿½tres login et password qui vont ï¿½tre rï¿½cupï¿½rï¿½s
+			// par le script PHP en post
+			// On rï¿½cupï¿½re le rï¿½sultat du script
+			response = client.execute(get);
+			entity = response.getEntity();
+			InputStream is = entity.getContent();
+			// On appelle une fonction dï¿½finie plus bas pour traduire la rï¿½ponse
+			read(is);
+			is.close();
+			if (entity != null) entity.consumeContent();
 		}
-		catch (ParserConfigurationException e)
+		catch (Exception e)
 		{
+			progressDialog.dismiss();
+			//createDialog("Error", "Couldn't establish a connection");
 		}
-		catch (SAXException e)
-		{
-		}
-		catch (IOException e)
-		{
-		}
-	}
-    
-    private class LoginContentHandler extends DefaultHandler
+    }
+	
+    private void read(InputStream in) throws IOException, JSONException
 	{
-		// Classe traitant le message de retour du script PHP
-		private boolean	in_loginTag		= false;
-		public int	    userID; 
-		private boolean	error_occured	= false;
-
-		public void startElement(String n, String l, String q, Attributes a) throws SAXException
-		{ 
-			if (l == "login") in_loginTag = true;
-			if (l == "error")
-			{
-				progressDialog.dismiss();
-				switch (Integer.parseInt(a.getValue("value")))
-				{
-					case 1:
-						createDialog("Error", "Couldn't connect to Database");
-						break;
-					case 2:
-						createDialog("Error", "Error in Database: Table missing");
-						break;
-					case 3:
-						createDialog("Error", "Invalid username and/or password");
-						break;
-				}
-				error_occured = true;
-			}
-			
-			userID = 1;
-			if (l == "user" && in_loginTag && a.getValue("id") != "")
-			{
-				// Dans le cas où tout se passe bien on récupère l'ID de l'utilisateur
-				//userID = Integer.parseInt(a.getValue("id"));
-				//createDialog("Error", "Invalid username and/or password");
-			}
-		} 
- 
-		public void endElement(String n, String l, String q) throws SAXException
-		{
-			// on renvoie l'id si tout est ok
-			if (l == "login")
-			{
-				in_loginTag = false;
-
-				if (!error_occured)
-				{
-					progressDialog.dismiss();
-					Intent i = new Intent();
-					i.putExtra("userid", userID);
-					quit(true,i); 
-				}
-			} 
-		}
-
-		public void characters(char ch[], int start, int length)
-		{
-		}
-
-		public void startDocument() throws SAXException
-		{
-		}
-
-		public void endDocument() throws SAXException
-		{
-		}
-
+		// On traduit le rï¿½sultat d'un flux
+		String str = StreamConverter.convertStreamToString(in);
+		JSONObject object = new JSONObject(str);
+		user_id = object.getInt("id");
+		access_token = object.getString("access");
 	}
-    
+        
 	private String md5(String in)
 	{
 		MessageDigest digest;
@@ -302,6 +216,8 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 	public void goListFriends(View v)
 	{
 		Intent i = new Intent(v.getContext(), RemplissageListe.class);
+		i.putExtra("id", user_id);
+		i.putExtra("access", access_token);
 		startActivityForResult(i, 0);
 	}
 }

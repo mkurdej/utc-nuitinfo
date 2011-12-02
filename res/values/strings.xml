@@ -7,5 +7,8 @@
     <string name="btnMovie">Films</string>
     <string name="btnMusic">Musiques</string>
     <string name="btnBook">Livres</string>
+    <string name="login">Se Connecter</string>
+    <string name="first_login">Premiere Connexion</string>
+    
 
 </resources>

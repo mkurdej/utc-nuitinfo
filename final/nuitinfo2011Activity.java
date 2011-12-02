@@ -61,7 +61,7 @@ public class nuitinfo2011Activity extends Activity implements View.OnClickListen
 		setContentView(R.layout.profile);
 		//Intent i = new Intent(nuitinfoActivity.this, login.class);
 		//startActivityForResult(i, RESULT_Main);
-		 
+		
 		Button buttonC = (Button) findViewById(R.id.buttonConn);
 		buttonC.setOnClickListener(this);
 		Button buttonL = (Button) findViewById(R.id.buttonLog);
