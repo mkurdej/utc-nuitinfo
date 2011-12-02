@@ -16,7 +16,6 @@
 */
 
 require 'facebook-php-sdk/src/facebook.php';
-
 require 'util.php';
 
 // Create our Application instance (replace this with your appId and secret).
@@ -50,7 +49,7 @@ if ($user) {
 if ($user) {
   $logoutUrl = $facebook->getLogoutUrl();
 } else {
-    $permissionScope = 'friends_birthday,friends_likes,friends_videos,offline_access';
+    $permissionScope = 'user_likes,friends_birthday,friends_likes'; //offline_access
     $loginParams = array(
         scope => $permissionScope,
         redirect_uri => 'http://www.floriandubois.com/nuitinfo/facebook/test-facebook-sdk.php'
@@ -117,24 +116,27 @@ Login using OAuth 2.0 handled by the PHP SDK:
     // http://developers.facebook.com/docs/reference/api/
     $friendListUrl = 'https://graph.facebook.com/me/friends?access_token=' . $accessToken;
 
-    $data = json_fetch_and_decode($friendListUrl, true);
+    $friendList = json_fetch_and_decode($friendListUrl, true);
+    $friendList = $friendList['data'];
     
-    $md_name = $data['data'][0]['name'];
-    $md_id = strval($data['data'][0]['id']);
+    $md_name = $friendList[1]['name'];
+    $friendId = $friendList[1]['id'];
     
-    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/likes?access_token=' . $accessToken;
-    $md_likes = json_fetch_and_decode($likesUrl, true);
+    $requests = array('books', 'likes', 'movies', 'music');
+    for($i = 0; $i < sizeof($requests); ++$i) {
+        $reqName = $requests[$i];
+        $friendDataUrl = 'https://graph.facebook.com/' . $friendId . '/' . $reqName . '?access_token=' . $accessToken;
+        $friendData[$reqName] = json_fetch_and_decode($friendDataUrl, true);
+        $friendData[$reqName] = $friendData[$reqName]['data'];
+    }
     
-    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/movies?access_token=' . $accessToken;
-    $md_movies = json_fetch_and_decode($likesUrl, true);
+    //$recommandations = getGiftRecommandations($friendData);
     
-    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/music?access_token=' . $accessToken;
-    $md_music = json_fetch_and_decode($likesUrl, true);
-    
-    $likesUrl = 'https://graph.facebook.com/' . $md_id . '/books?access_token=' . $accessToken;
-    $md_books = json_fetch_and_decode($likesUrl, true);
-    
-    echo json_encode($md_likes);
+    echo 'Friend Id = ' . $friendId . '\n';
+    echo 'Books = ' . json_encode($friendData['books']) . '\n';
+    echo 'Likes = ' . json_encode($friendData['likes']) . '\n';
+    echo 'Movies = ' . json_encode($friendData['movies']) . '\n';
+    echo 'Music = ' . json_encode($friendData['music']) . '\n';
 ?>
 
 <a href="<?php echo $friendListUrl; ?>">Get friend list</a>

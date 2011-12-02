@@ -29,6 +29,8 @@ facebook/facebook-php-sdk/src/facebook.php -text
 facebook/facebook-php-sdk/src/fb_ca_chain_bundle.crt -text
 facebook/facebook-php-sdk/tests/bootstrap.php -text
 facebook/facebook-php-sdk/tests/tests.php -text
+facebook/getFriendList.php -text
+facebook/getRecommandations.php -text
 facebook/test-facebook-sdk.php -text
 facebook/util.php -text
 gen/nuitinfo/appli/R.java -text

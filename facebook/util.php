@@ -5,4 +5,13 @@ function json_fetch_and_decode($url, $assoc_array = true) {
     return json_decode($json_str, $assoc_array);
 }
 
+function compare_desc_by_created_time($a, $b) {
+    $field = 'created_time';
+    return -1 * strcmp($a[$field], $b[$field]);
+}
+
+function sort_desc_by_created_time($assoc_array) {
+    return usort($assoc_array, compare_desc_by_created_time);
+}
+
 ?>
