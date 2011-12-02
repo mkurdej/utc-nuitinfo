@@ -63,6 +63,7 @@ src/nuitinfo/appli/Cadeau.java -text
 src/nuitinfo/appli/ChoixType.java -text
 src/nuitinfo/appli/ListeCadeau.java -text
 src/nuitinfo/appli/RemplissageListe.java -text
+src/nuitinfo/appli/StreamConverter.java -text
 src/nuitinfo/appli/login.java -text
 src/nuitinfo/appli/nuitinfoActivity.java -text
 src/nuitinfo/appli/profile.java -text

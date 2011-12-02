@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Ami implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private long id;
 	private String nom;
 	private String mail;
 	private String img;
@@ -17,7 +17,7 @@ public class Ami implements Serializable
 		this.nom = nom;
 	}
 	
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
