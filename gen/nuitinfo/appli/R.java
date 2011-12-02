@@ -30,7 +30,7 @@ public final class R {
         public static final int lblTypeCadeau=0x7f050005;
         public static final int listviewcadeau=0x7f050006;
         public static final int listviewperso=0x7f050004;
-        public static final int nomCadeau=0x7f050003;
+        public static final int name=0x7f050003;
         public static final int nomPrenom=0x7f050001;
         public static final int okbutton=0x7f050009;
         public static final int password=0x7f050008;

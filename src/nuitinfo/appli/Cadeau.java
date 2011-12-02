@@ -5,14 +5,14 @@ import java.util.HashMap;
 public class Cadeau
 {
 	private int id;
-	private String nom;
-	private String description;
+	private String name;
+	private String category;
 	
-	public Cadeau(int id, String nom, String des)
+	public Cadeau(int id, String nom, String category)
 	{
 		this.id = id;
-		this.nom = nom;
-		this.description = des;
+		this.name = nom;
+		this.category = category;
 	}
 
 	public int getId()
@@ -25,32 +25,22 @@ public class Cadeau
 		this.id = id;
 	}
 
-	public String getNom()
+	public String getName()
 	{
-		return nom;
+		return name;
 	}
 
-	public void setNom(String nom)
+	public void setName(String nom)
 	{
-		this.nom = nom;
-	}
-
-	public String getDescription()
-	{
-		return description;
-	}
-
-	public void setDescription(String description)
-	{
-		this.description = description;
+		this.name = nom;
 	}
 	
 	public HashMap<String, String> getHashMap()
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", String.valueOf(id));
-		map.put("nom", nom);
-		map.put("description", description);
+		map.put("category", category);
+		map.put("name", name);
 		
 		return map;
 	}

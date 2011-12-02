@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class ChoixType extends Activity implements View.OnClickListener
 {
-	private int idAmi = -1;
+	private long idAmi = -1;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -16,7 +16,7 @@ public class ChoixType extends Activity implements View.OnClickListener
 		setContentView(R.layout.typecadeau);
 		
 		Bundle b = getIntent().getExtras();
-		idAmi = b.getInt("idAmi");
+		idAmi = b.getLong("idAmi");
 		
 		Button btnMovie = (Button) findViewById(R.id.btnMovie);
 		Button btnMusic = (Button) findViewById(R.id.btnMusic);
