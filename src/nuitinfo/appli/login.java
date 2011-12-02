@@ -74,9 +74,7 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 		button.setOnClickListener(this);
 		
 		button = (Button) findViewById(R.id.cancelbutton);
-		Button btnAmis = (Button) findViewById(R.id.btnAmis);
 		button.setOnClickListener(this);
-		btnAmis.setOnClickListener(this);
     }
 	
     public boolean onTouch(View v, MotionEvent event) {
@@ -185,7 +183,7 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
 		String str = StreamConverter.convertStreamToString(in);
 		JSONObject object = new JSONObject(str);
 		user_id = object.getInt("id");
-		access_token = object.getString("access");
+		access_token = object.getString("access_token");
 	}
         
 	private String md5(String in)

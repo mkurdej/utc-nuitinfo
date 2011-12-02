@@ -23,7 +23,7 @@
         android:id="@+id/buttonConn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:text="@string/first_login" />
 
 
 
@@ -32,6 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="fill"
-        android:text="@string/hello" />
+        android:text="@string/login" />
 
 </LinearLayout>

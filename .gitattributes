@@ -22,6 +22,10 @@ bin/res/drawable-hdpi/ic_launcher.png -text
 bin/res/drawable-ldpi/ic_launcher.png -text
 bin/res/drawable-mdpi/ic_launcher.png -text
 bin/resources.ap_ -text
+doc/liste_amis.png -text
+doc/liste_amis2.png -text
+doc/main.png -text
+facebook/connexion.php -text
 facebook/facebook-php-sdk/changelog.md -text
 facebook/facebook-php-sdk/examples/example.php -text
 facebook/facebook-php-sdk/examples/with_js_sdk.php -text
@@ -65,6 +69,7 @@ src/nuitinfo/appli/ChoixType.java -text
 src/nuitinfo/appli/ListeCadeau.java -text
 src/nuitinfo/appli/RemplissageListe.java -text
 src/nuitinfo/appli/StreamConverter.java -text
+src/nuitinfo/appli/log.xml -text
 src/nuitinfo/appli/login.java -text
 src/nuitinfo/appli/nuitinfoActivity.java -text
 src/nuitinfo/appli/profile.java -text

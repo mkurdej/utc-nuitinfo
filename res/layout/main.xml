@@ -50,13 +50,7 @@
 	           android:layout_height="wrap_content"
 	           android:text="Login"
 	       />
-
-	       <Button
-	       	android:id="@+id/btnAmis"
-	       	android:layout_width="match_parent"
-	       	android:layout_height="wrap_content"
-	       	android:text="@string/MaListeAmi" />
-	 
+
 	      <Button
 	           android:id="@+id/cancelbutton"
 	           android:layout_width="fill_parent"

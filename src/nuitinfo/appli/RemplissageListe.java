@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,95 +15,48 @@ import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
-/**
- * Pour �tre plus pr�cis, c'est le remplissage de la liste d'ami.
- * @author M4veR1K & Lowery
- *
- */
-public class RemplissageListe extends Activity implements Runnable
-{
-	private ListView maListViewPerso;
-	private ProgressDialog progressDialog;
-	private ArrayList<HashMap<String, String>> listItem;
+public class RemplissageListe extends ListActivity {
 	private int user_id;
 	private String access_token;
-	private Handler handler = new Handler() {
-		public void handleMessage(Message msg)
-		{
-			progressDialog.dismiss();
-			
-			SimpleAdapter mSchedule = new SimpleAdapter(RemplissageListe.this.getBaseContext(), listItem, R.layout.itemami,
-					new String[] { "img", "nom"}, new int[] { R.id.img, R.id.nomPrenom});
 
-			// On attribue � notre listView l'adapter que l'on vient de cr�er
-			maListViewPerso.setAdapter(mSchedule);
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
 
-			// Enfin on met un �couteur d'�v�nement sur notre listView
-			maListViewPerso.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				@SuppressWarnings("unchecked")
-				public void onItemClick(AdapterView<?> a, View v, int position, long id)
-				{
-					// on r�cup�re la HashMap contenant les infos de notre item (titre, description, img)
-					HashMap<String, String> map = (HashMap<String, String>) maListViewPerso.getItemAtPosition(position);
-
-					Intent i = new Intent(v.getContext(), ChoixType.class);
-					i.putExtra("idAmi", Long.parseLong(map.get("id")));
-					startActivityForResult(i, 0);
-				}
-			});
-		}
-		
-		
-	};
-
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.listeami);
-		
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setMessage("Please wait...");
-		progressDialog.setIndeterminate(true);
-		progressDialog.setCancelable(false);
-		
 		Intent i = getIntent();
-		user_id = i.getIntExtra("id", 0);
-		access_token = i.getStringExtra("access");
+		//user_id = i.getIntExtra("id", 0);
+		//access_token = i.getStringExtra("access");
+		user_id = 1526860101;
+		access_token = "AAAD59V4w2QsBAHvZAVa4kL55dfAOIEEsdqyAQWn1FZART28hhRKcKZCom8EQXTWmBtq4614bpFuSxyUyhUmUIGiLLKSGOUZD";
+		
+		List<HashMap<String, String>> listItem = getListAmis(user_id, access_token);
+		SimpleAdapter adapter = new SimpleAdapter(RemplissageListe.this.getBaseContext(), listItem, R.layout.itemami,
+				new String[] { "img", "nom"}, new int[] { R.id.img, R.id.nomPrenom});
+		setListAdapter(adapter);
+	}
 
-		// R�cup�ration de la listview cr��e dans le fichier main.xml
-		maListViewPerso = (ListView) findViewById(R.id.listviewperso);
-
-		// Cr�ation de la ArrayList qui nous permettra de remplir la listView
-		progressDialog.show();
-		launchWait();	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		HashMap<String, String> map = (HashMap<String, String>) getListAdapter().getItem(position);
+		String item = map.get("nom");
+		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+		
+		Intent i = new Intent(v.getContext(), ChoixType.class);
+		i.putExtra("idAmi", Long.parseLong(map.get("id")));
+		startActivityForResult(i, 0);
 	}
 	
-	public void launchWait()
+	public List<HashMap<String, String>> getListAmis(int userid, String access_token)
 	{
-		progressDialog.show();
-		Thread t = new Thread(this);
-		t.start();
-	}
-
-	public ArrayList<HashMap<String, String>> getListAmis(int userid, String access_token)
-	{
-		ArrayList<HashMap<String, String>> returnedList = null;
+		List<HashMap<String, String>> returnedList = null;
 		// On se connecte au serveur afin de communiquer avec le PHP
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpConnectionParams.setConnectionTimeout(client.getParams(), 15000);
@@ -145,12 +99,4 @@ public class RemplissageListe extends Activity implements Runnable
 
 		return returnedList;
 	}
-
-
-	public void run()
-	{
-		listItem = getListAmis(user_id, access_token);
-		handler.sendEmptyMessage(0);
-	}
-	
 }
