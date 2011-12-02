@@ -1,9 +1,11 @@
 package nuitinfo.appli;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Ami
+public class Ami implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nom;
 	private String mail;
