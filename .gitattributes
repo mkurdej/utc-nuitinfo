@@ -39,11 +39,17 @@ res/drawable-hdpi/ic_launcher.png -text
 res/drawable-ldpi/ic_launcher.png -text
 res/drawable-mdpi/ic_launcher.png -text
 res/layout/itemami.xml -text
+res/layout/itemcadeau.xml -text
 res/layout/listeami.xml -text
+res/layout/listecadeau.xml -text
 res/layout/main.xml -text
 res/layout/profile.xml -text
+res/layout/typecadeau.xml -text
 res/values/strings.xml -text
 src/nuitinfo/appli/Ami.java -text
+src/nuitinfo/appli/Cadeau.java -text
+src/nuitinfo/appli/ChoixType.java -text
+src/nuitinfo/appli/ListeCadeau.java -text
 src/nuitinfo/appli/RemplissageListe.java -text
 src/nuitinfo/appli/login.java -text
 src/nuitinfo/appli/nuitinfoActivity.java -text
