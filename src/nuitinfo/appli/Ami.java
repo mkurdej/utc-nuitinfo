@@ -7,6 +7,7 @@ public class Ami
 	private int id;
 	private String nom;
 	private String mail;
+	private String img;
 	
 	public Ami(int id, String nom)
 	{
@@ -44,13 +45,23 @@ public class Ami
 		this.mail = mail;
 	}
 	
+	public String getImg()
+	{
+		return img;
+	}
+	
+	public void setImg(String img)
+	{
+		this.img = img;
+	}
+	
 	public HashMap<String, String> getHashMap()
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", String.valueOf(id));
 		map.put("nom", nom);
 		map.put("description", "Tableur");
-		map.put("img", String.valueOf(R.drawable.ic_launcher));
+		map.put("img", img);
 		
 		return map;
 	}
