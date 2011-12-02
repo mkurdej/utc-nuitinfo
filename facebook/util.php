@@ -10,8 +10,9 @@ function compare_desc_by_created_time($a, $b) {
     return -1 * strcmp($a[$field], $b[$field]);
 }
 
-function sort_desc_by_created_time($assoc_array) {
-    return usort($assoc_array, compare_desc_by_created_time);
+function compare_asc_by_name($a, $b) {
+    $field = 'name';
+    return strcmp($a[$field], $b[$field]);
 }
 
 ?>

@@ -22,7 +22,7 @@ function getGiftRecommandations($friendData) {
         if(sizeof($friendData[$reqName]) == 0) {
             continue;
         }
-        sort_desc_by_created_time($friendData[$reqName]);
+        usort($friendData[$reqName], compare_desc_by_created_time);
         
         $maxJ = min($maxRecommendationsPerCategory, sizeof($friendData[$reqName]));
         for($j = 0; $j < $maxJ; ++$j) {

@@ -6,6 +6,9 @@
 //  friend_id=...
 //  category=(books|movies|music)
 
+// optional parameters:
+//  max_items=...
+
 require 'facebook-php-sdk/src/facebook.php';
 require 'util.php';
 
@@ -19,7 +22,7 @@ function getGiftRecommandations($friendData, $category) {
     if(sizeof($friendData) == 0) {
         return $recommandations;
     }
-    sort_desc_by_created_time($friendData);
+    usort($friendData, compare_desc_by_created_time);
     
     $maxJ = min($maxRecommendationsPerCategory, sizeof($friendData));
     for($j = 0; $j < $maxJ; ++$j) {
@@ -39,6 +42,7 @@ $user_id = $_GET["user_id"];
 $friend_id = $_GET["friend_id"];
 $access_token = $_GET["access_token"];
 $category = $_GET["category"];
+$max_items = $_GET["max_items"];
 
 // temporary only
 $user_id = 1526860101;
