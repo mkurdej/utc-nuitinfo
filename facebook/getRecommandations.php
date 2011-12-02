@@ -13,26 +13,28 @@ function getGiftRecommandations($friendData) {
     
     $recommandations = array();
     
-    $requests = array('books', 'likes', 'movies', 'music');
-    for($i = 0; i < sizeof($requests); ++$i) {
+    $requests = array('books', 'movies', 'music');
+    for($i = 0; $i < sizeof($requests); ++$i) {
         $reqName = $requests[$i];
         if(!is_array($friendData[$reqName])) {
             continue;
         }
+        if(sizeof($friendData[$reqName]) == 0) {
+            continue;
+        }
         sort_desc_by_created_time($friendData[$reqName]);
         
-        for($j = 0; j < $maxRecommendationsPerCategory && j < sizeof($friendData[$reqName]); ++$j) {
-            echo $sizeof($friendData[$reqName]) . '\n';
+        $maxJ = min($maxRecommendationsPerCategory, sizeof($friendData[$reqName]));
+        for($j = 0; $j < $maxJ; ++$j) {
+            $element = $friendData[$reqName][$j];
             $newRecommandation = array(
                 'category' => $reqName,
-                'name' => $friendData[$reqName]['name'],
-                'id' => $friendData[$reqName]['id'],
-                'created_time' => $friendData[$reqName]['created_time'],
+                'name' => $element['name'],
+                'id' => $element['id'],
+                'created_time' => $element['created_time'],
             );
-            print_r($newRecommandation);
-            $recommandations = array_merge($recommandations, $newRecommandation);
+            array_push($recommandations, $newRecommandation);
         }
-        $friendData[$reqName];
     }
     return $recommandations;
 }
@@ -54,17 +56,6 @@ $facebook = new Facebook(array(
 ));
 
 if ($user_id) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user_id = null;
-  }
-}
-
-// Login or logout url will be needed depending on current user state.
-if ($user_id) {
     $requests = array('books', 'movies', 'music');
     for($i = 0; $i < sizeof($requests); ++$i) {
         $reqName = $requests[$i];
@@ -76,8 +67,7 @@ if ($user_id) {
     print_r(json_encode($recommandations));
     //exit();
 } else {
-    // TODO: send error message
-    $error = array('error' => 'error message');
+    $error = array('error' => 'User not connected');
     print_r(json_encode($error));
     exit(-1);
 }

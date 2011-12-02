@@ -23,12 +23,11 @@ if ($user) {
     $friendListUrl = 'https://graph.facebook.com/' . $user . '/friends?access_token=' . $access_token;
     //echo $friendListUrl . '\n';
     $friendList = json_fetch_and_decode($friendListUrl, true);
-    $friendList = $friendList['data'];    //echo json_encode($friendList);
-    print_r(json_encode($friendList));
+    $friendList = $friendList['data'];    echo json_encode($friendList);
 } else {
     // TODO: send error message
-    $error = array('error' => 'error message');
-    print_r(json_encode($error));
+    $error = array('error' => 'User not connected');
+    echo json_encode($error);
     exit(-1);
 }
 
