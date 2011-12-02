@@ -12,8 +12,7 @@
 require 'facebook-php-sdk/src/facebook.php';
 require 'util.php';
 
-function getGiftRecommandations($friendData, $category) {
-    $maxRecommendationsPerCategory = 3;
+function getGiftRecommandations($friendData, $category, $max_items) {
     $recommandations = array();
 
     if(!is_array($friendData)) {
@@ -24,8 +23,8 @@ function getGiftRecommandations($friendData, $category) {
     }
     usort($friendData, compare_desc_by_created_time);
     
-    $maxJ = min($maxRecommendationsPerCategory, sizeof($friendData));
-    for($j = 0; $j < $maxJ; ++$j) {
+    $max_items = min($max_items, sizeof($friendData));
+    for($j = 0; $j < $max_items; ++$j) {
         $element = $friendData[$j];
         $newRecommandation = array(
             'category' => $category,
@@ -43,6 +42,9 @@ $friend_id = $_GET["friend_id"];
 $access_token = $_GET["access_token"];
 $category = $_GET["category"];
 $max_items = $_GET["max_items"];
+if(is_null($max_items)) {
+    $max_items = 10;
+}
 
 // temporary only
 $user_id = 1526860101;
@@ -60,7 +62,7 @@ if ($user_id) {
     $friendData = json_fetch_and_decode($friendDataUrl, true);
     $friendData = $friendData['data'];
 
-    $recommandations = getGiftRecommandations($friendData, $category);
+    $recommandations = getGiftRecommandations($friendData, $category, $max_items);
     echo json_encode($recommandations);
 } else {
     $error = array('error' => 'User not connected');
