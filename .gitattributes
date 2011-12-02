@@ -22,8 +22,10 @@ bin/res/drawable-hdpi/ic_launcher.png -text
 bin/res/drawable-ldpi/ic_launcher.png -text
 bin/res/drawable-mdpi/ic_launcher.png -text
 bin/resources.ap_ -text
+bin/utc-nuitinfo.apk -text
 doc/liste_amis.png -text
 doc/liste_amis2.png -text
+doc/login.png -text
 doc/main.png -text
 facebook/connexion.php -text
 facebook/facebook-php-sdk/changelog.md -text

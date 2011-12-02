@@ -117,12 +117,7 @@ public class login extends Activity implements View.OnTouchListener, View.OnClic
             		/* agir pour bouton 2 */
             		quit(false, null);
             	break;
-            case R.id.btnAmis :
-            {
-            	goListFriends(v);
-            	break;
-            }
-    			
+            	
     	/* etc. */
         }
     }

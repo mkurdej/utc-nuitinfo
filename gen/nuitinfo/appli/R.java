@@ -14,14 +14,13 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnAmis=0x7f05000c;
-        public static final int btnBook=0x7f050011;
-        public static final int btnMovie=0x7f05000f;
-        public static final int btnMusic=0x7f050010;
-        public static final int button1=0x7f05000e;
+        public static final int btnBook=0x7f050010;
+        public static final int btnMovie=0x7f05000e;
+        public static final int btnMusic=0x7f05000f;
+        public static final int button1=0x7f05000d;
         public static final int buttonConn=0x7f050000;
         public static final int buttonLog=0x7f050001;
-        public static final int cancelbutton=0x7f05000d;
+        public static final int cancelbutton=0x7f05000c;
         public static final int description=0x7f050004;
         public static final int img=0x7f050002;
         public static final int lblTypeCadeau=0x7f050007;
