@@ -35,6 +35,12 @@ facebook/log.xml -text
 facebook/login.php -text
 facebook/test-facebook-sdk.php -text
 facebook/util.php -text
+final/login.java -text
+final/main.xml -text
+final/nuitinfo2011Activity.java -text
+final/profile.java -text
+final/profile.xml -text
+final/strings.xml -text
 gen/nuitinfo/appli/R.java -text
 /info.txt -text
 /proguard.cfg -text

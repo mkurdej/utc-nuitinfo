@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, nuitinfo2011Activity!</string>
+    <string name="app_name">nuitinfo2011</string>
+    <string name="login">Log in</string>
+    <string name="first_login">First connection</string>
+
+</resources>
