@@ -6,14 +6,12 @@ public class Ami
 {
 	private int id;
 	private String nom;
-	private String prenom;
 	private String mail;
 	
-	public Ami(int id, String nom, String prenom)
+	public Ami(int id, String nom)
 	{
 		this.id = id;
 		this.nom = nom;
-		this.prenom = prenom;
 	}
 	
 	public int getId()
@@ -36,16 +34,6 @@ public class Ami
 		this.nom = nom;
 	}
 	
-	public String getPrenom()
-	{
-		return prenom;
-	}
-	
-	public void setPrenom(String prenom)
-	{
-		this.prenom = prenom;
-	}
-	
 	public String getMail()
 	{
 		return mail;
@@ -60,9 +48,9 @@ public class Ami
 	{
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", String.valueOf(id));
-		map.put("nomPrenom", prenom + " " + nom);
+		map.put("nom", nom);
 		map.put("description", "Tableur");
-		map.put("img", String.valueOf(R.drawable.fleur));
+		map.put("img", String.valueOf(R.drawable.ic_launcher));
 		
 		return map;
 	}
