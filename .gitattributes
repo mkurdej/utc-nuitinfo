@@ -49,6 +49,7 @@ gen/nuitinfo/appli/R.java -text
 res/drawable-hdpi/ic_launcher.png -text
 res/drawable-ldpi/ic_launcher.png -text
 res/drawable-mdpi/ic_launcher.png -text
+res/layout/home.xml -text svneol=unset#text/plain
 res/layout/itemami.xml -text
 res/layout/itemcadeau.xml -text
 res/layout/listeami.xml -text
